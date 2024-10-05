@@ -14,7 +14,7 @@ const fetchRoutes=require('./routes/fetch')
 connectToDB()
 
 app.use(cors({
-  origin: 'https://borrower-management-system.vercel.app',
+  origin: ['https://borrower-management-system.vercel.app', 'http://localhost:3000'],
   credentials: true
 }))
 
