@@ -4,7 +4,10 @@ const installmentSchema = new mongoose.Schema({
     date: {
       type: Date,
     },
-    amount: {
+    demandedAmount: {
+      type: Number,
+    },
+    paidAmount: {
       type: Number,
     },
     paid: {

@@ -11,6 +11,7 @@ const morgan=require('morgan')
 const {connectToDB}=require('./database/connection')
 const authRoutes=require('./routes/auth')
 const fetchRoutes=require('./routes/fetch')
+const installmentRoutes=require('./routes/installments')
 connectToDB()
 
 app.use(cors({
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth',authRoutes)
 app.use('/fetch',fetchRoutes)
+app.use('/installment',installmentRoutes)
 
 
 
