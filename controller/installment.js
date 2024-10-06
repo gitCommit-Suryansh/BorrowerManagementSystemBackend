@@ -16,8 +16,10 @@ exports.addDailyInstallment = async (req, res) => {
                 borrowerId,
                 {
                     $push: { installments: installment },
-                    $inc: { refundedAmount: installment.receivedAmount },
-                    $inc: { balanceAmount: -installment.receivedAmount }
+                    $inc: { 
+                        refundedAmount: installment.receivedAmount,
+                        balanceAmount: -installment.receivedAmount 
+                    }
 
                 },
                 { new: true }
