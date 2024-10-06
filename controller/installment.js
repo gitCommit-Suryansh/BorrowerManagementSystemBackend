@@ -23,3 +23,16 @@ exports.addDailyInstallment = async (req, res) => {
     }
 }
 
+exports.fetchDailyInstallment = async (req, res) => {
+    try {
+        const { borrowerId } = req.body;
+        const borrower = await DailyBorrower.findById(borrowerId);
+        if (!borrower) {
+            return res.status(404).json({ message: 'Borrower not found' });
+        }
+
+        res.status(200).json({ message: 'Borrower found', installments: borrower.installments });
+    } catch (error) {
+        res.status(500).json({ message: 'Error processing request', error: error.message });
+    }
+}
