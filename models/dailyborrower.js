@@ -40,6 +40,10 @@ const dailyborrowerSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+    refundedAmount: {
+        type: Number,
+        default: 0
+    },
     emiAmount: {
         type: Number,
         required: true
