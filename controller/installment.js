@@ -4,15 +4,20 @@ const MonthlyBorrower = require('../models/monthlyborrower');
 exports.addDailyInstallment = async (req, res) => {
     try {
         const { borrowerId, installment } = req.body;
-        console.log(borrowerId, installment)
         // Search for the borrower in the DailyInstallment model
-        const borrower = await DailyBorrower.findById(borrowerId);
-        console.log(borrower)
+        const borrower = await DailyBorrower.findById(borrowerId)
+
         if (!borrower) {
             return res.status(404).json({ message: 'Borrower not found' });
         }
-
-        res.status(200).json({ message: 'Borrower found', borrower });
+        try {
+            const updatedBorrower = await DailyBorrower.findByIdAndUpdate(borrowerId, {
+                $push: { installments: installment }
+            }, { new: true });
+            res.status(200).json({ message: 'Installment added successfully', borrower: updatedBorrower });
+        } catch (error) {
+            res.status(500).json({ message: 'Error adding installment', error: error.message });
+        }
     } catch (error) {
         res.status(500).json({ message: 'Error processing request', error: error.message });
     }
