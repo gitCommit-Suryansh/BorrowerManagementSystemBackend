@@ -12,7 +12,8 @@ exports.addDailyInstallment = async (req, res) => {
         }
         try {
             const updatedBorrower = await DailyBorrower.findByIdAndUpdate(borrowerId, {
-                $push: { installments: installment }
+                $push: { installments: installment },
+                $inc: { refundAmount: -installment.receivedAmount }
             }, { new: true });
             res.status(200).json({ message: 'Installment added successfully', borrower: updatedBorrower });
         } catch (error) {
