@@ -49,3 +49,31 @@ exports.fetchDailyInstallment = async (req, res) => {
         res.status(500).json({ message: 'Error processing request', error: error.message });
     }
 }
+
+exports.addDailyBorrowerDiscount = async (req, res) => {
+    try {
+        const { borrowerId, discountAmount } = req.body;
+        const borrower = await DailyBorrower.findById(borrowerId);
+
+        if (!borrower) {
+            return res.status(404).json({ message: 'Borrower not found' });
+        }
+
+        try {
+            const updatedBorrower = await DailyBorrower.findByIdAndUpdate(
+                borrowerId,
+                {
+                    $set: { discount: discountAmount },
+                    $inc: { balanceAmount: -discountAmount }
+                },
+                { new: true }
+            )
+
+            res.status(200).json({ message: 'Discount applied successfully', borrower: updatedBorrower });
+        } catch (error) {
+            res.status(500).json({ message: 'Error applying discount', error: error.message });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error processing request', error: error.message });
+    }
+}
