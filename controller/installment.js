@@ -21,13 +21,7 @@ exports.addDailyInstallment = async (req, res) => {
                         balanceAmount: -installment.receivedAmount 
                     },
                     $set: {
-                        loanStatus: {
-                            $cond: [
-                                { $eq: [{ $subtract: ["$balanceAmount", installment.receivedAmount] }, 0] },
-                                "closed",
-                                "$loanStatus"
-                            ]
-                        }
+                        loanStatus: borrower.balanceAmount - installment.receivedAmount <= 0 ? "closed" : borrower.loanStatus
                     }
 
                 },
