@@ -5,16 +5,21 @@ exports.addDailyInstallment = async (req, res) => {
     try {
         const { borrowerId, installment } = req.body;
         // Search for the borrower in the DailyInstallment model
-        const borrower = await DailyBorrower.findById(borrowerId)
+        const borrower = await DailyBorrower.findById(borrowerId);
 
         if (!borrower) {
             return res.status(404).json({ message: 'Borrower not found' });
         }
+
         try {
-            const updatedBorrower = await DailyBorrower.findByIdAndUpdate(borrowerId, {
-                $push: { installments: installment },
-                $set: { refundedAmount: { $add: ['$refundedAmount', installment.receivedAmount] } }
-            }, { new: true });
+            const updatedBorrower = await DailyBorrower.findByIdAndUpdate(
+                borrowerId,
+                {
+                    $push: { installments: installment },
+                    $inc: { refundedAmount: installment.receivedAmount }
+                },
+                { new: true }
+            );
             res.status(200).json({ message: 'Installment added successfully', borrower: updatedBorrower });
         } catch (error) {
             res.status(500).json({ message: 'Error adding installment', error: error.message });
