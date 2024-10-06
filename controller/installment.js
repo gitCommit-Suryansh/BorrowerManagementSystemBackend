@@ -25,7 +25,7 @@ exports.addDailyInstallment = async (req, res) => {
 
 exports.fetchDailyInstallment = async (req, res) => {
     try {
-        const { borrowerId } = req.body;
+        const { borrowerId } = req.query;
         const borrower = await DailyBorrower.findById(borrowerId);
         if (!borrower) {
             return res.status(404).json({ message: 'Borrower not found' });
