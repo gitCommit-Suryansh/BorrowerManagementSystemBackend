@@ -7,7 +7,7 @@ const installmentSchema = new mongoose.Schema({
     demandedAmount: {
       type: Number,
     },
-    paidAmount: {
+    receivedAmount: {
       type: Number,
     },
     paid: {
