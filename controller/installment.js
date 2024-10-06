@@ -19,6 +19,15 @@ exports.addDailyInstallment = async (req, res) => {
                     $inc: { 
                         refundedAmount: installment.receivedAmount,
                         balanceAmount: -installment.receivedAmount 
+                    },
+                    $set: {
+                        loanStatus: {
+                            $cond: {
+                                if: { $eq: [{ $subtract: ["$balanceAmount", installment.receivedAmount] }, 0] },
+                                then: "closed",
+                                else: "$loanStatus"
+                            }
+                        }
                     }
 
                 },
