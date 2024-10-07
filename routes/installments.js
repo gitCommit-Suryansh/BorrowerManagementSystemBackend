@@ -4,9 +4,9 @@ const installmentController = require('../controller/installment');
 
 router
     .post('/adddailyinstallment',installmentController.addDailyInstallment)
-    // .post('/addmonthlyinstallment',installmentController.addMonthlyInstallment)
+    .post('/addmonthlyinstallment',installmentController.addMonthlyInstallment)
     .get('/fetchdailyinstallment',installmentController.fetchDailyInstallment)
-    .post('/adddailyborrowerdiscount',installmentController.addDailyBorrowerDiscount)
     .get('/fetchmonthlyinstallment',installmentController.fetchMonthlyInstallment)
+    .post('/adddailyborrowerdiscount',installmentController.addDailyBorrowerDiscount)
 
 module.exports = router;
