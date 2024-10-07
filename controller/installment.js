@@ -94,3 +94,22 @@ exports.addDailyBorrowerDiscount = async (req, res) => {
     res.status(500).json({ message: "Error processing request", error: error.message });
   }
 };
+
+
+exports.fetchMonthlyInstallment = async (req, res) => {
+    try {
+      const { borrowerId } = req.query;
+      const borrower = await MonthlyBorrower.findById(borrowerId);
+      if (!borrower) {
+        return res.status(404).json({ message: "Borrower not found" });
+      }
+      console.log(borrower.installments);
+      res
+        .status(200)
+        .json({ message: "Borrower found", installments: borrower.installments });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: "Error processing request", error: error.message });
+    }
+  };
