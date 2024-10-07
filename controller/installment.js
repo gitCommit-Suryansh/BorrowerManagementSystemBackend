@@ -152,7 +152,7 @@ exports.principlerepayment=async(req,res)=>{
         try {
             const updatedBorrower = await MonthlyBorrower.findByIdAndUpdate(
               borrowerId,
-              { $set: { balanceAmount: 0 } },
+              { $set: { balanceAmount: 0, loanStatus: "closed" } },
               { new: true }
             );
             res.status(200).json({message: "Installment added successfully",borrower: updatedBorrower,});
