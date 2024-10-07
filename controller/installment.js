@@ -80,7 +80,7 @@ exports.addDailyBorrowerDiscount = async (req, res) => {
         {
           $set: {
             discount: discountAmount,
-            loanStatus: borrower.balanceAmount - installment.discountAmount <= 0 ? "closed" : borrower.loanStatus,
+            loanStatus: borrower.balanceAmount - discountAmount <= 0 ? "closed" : borrower.loanStatus,
           },
           $inc: { balanceAmount: -discountAmount },
         },
