@@ -1,4 +1,5 @@
 const DailyBorrower = require("../models/dailyborrower");
+const monthlyborrower = require("../models/monthlyborrower");
 const MonthlyBorrower = require("../models/monthlyborrower");
 
 exports.addDailyInstallment = async (req, res) => {
@@ -117,7 +118,6 @@ exports.fetchMonthlyInstallment = async (req, res) => {
 exports.addMonthlyInstallment = async (req, res) => {
     try {
       const { borrowerId, installment } = req.body;
-      // Search for the borrower in the DailyInstallment model
       const borrower = await MonthlyBorrower.findById(borrowerId);
   
       if (!borrower) {
@@ -129,15 +129,11 @@ exports.addMonthlyInstallment = async (req, res) => {
           borrowerId,
           {
             $push: { installments: installment },
-           
             // $set: {loanStatus:borrower.balanceAmount - installment.receivedAmount <= 0? "closed": borrower.loanStatus,},
           },
           { new: true }
         );
-        res.status(200).json({
-          message: "Installment added successfully",
-          borrower: updatedBorrower,
-        });
+        res.status(200).json({message: "Installment added successfully",borrower: updatedBorrower,});
       } catch (error) {
         res.status(500).json({ message: "Error adding installment", error: error.message });
       }
@@ -145,3 +141,25 @@ exports.addMonthlyInstallment = async (req, res) => {
       res.status(500).json({ message: "Error processing request", error: error.message });
     }
   };
+
+exports.principlerepayment=async(req,res)=>{
+    try{
+        let {borrowerId}=req.body
+        const borrower = await MonthlyBorrower.findById(borrowerId);
+        if(!borrower){
+            return res.status(404).json({ message: "Borrower not found" });
+        }
+        try {
+            const updatedBorrower = await MonthlyBorrower.findByIdAndUpdate(
+              borrowerId,
+              { $set: { balanceAmount: 0 } },
+              { new: true }
+            );
+            res.status(200).json({message: "Installment added successfully",borrower: updatedBorrower,});
+          } catch (error) {
+            res.status(500).json({ message: "Error adding installment", error: error.message });
+          }
+    }catch(error){
+        res.status(500).json({ message: "Error processing request", error: error.message });
+    }
+}
