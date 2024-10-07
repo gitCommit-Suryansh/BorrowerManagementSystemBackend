@@ -7,5 +7,6 @@ router
     // .post('/addmonthlyinstallment',installmentController.addMonthlyInstallment)
     .get('/fetchdailyinstallment',installmentController.fetchDailyInstallment)
     .post('/adddailyborrowerdiscount',installmentController.addDailyBorrowerDiscount)
+    .get('/fetchmonthlyinstallment',installmentController.fetchMonthlyInstallment)
 
 module.exports = router;
