@@ -54,6 +54,9 @@ const monthlyborrowerSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+    discount:{
+        type:Number
+    },
     loanStartDate: {
         type: Date,
         required: true

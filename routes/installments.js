@@ -8,6 +8,7 @@ router
     .get('/fetchdailyinstallment',installmentController.fetchDailyInstallment)
     .get('/fetchmonthlyinstallment',installmentController.fetchMonthlyInstallment)
     .post('/adddailyborrowerdiscount',installmentController.addDailyBorrowerDiscount)
+    .post('/addmonthlyborrowerdiscount',installmentController.addMonthlyBorrowerDiscount)
     .post('/principlerepayment',installmentController.principlerepayment)
 
 module.exports = router;
