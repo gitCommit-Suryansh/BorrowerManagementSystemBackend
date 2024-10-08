@@ -36,8 +36,8 @@ app.use('/installment',installmentRoutes)
 
 
 
-app.get('/', (req, res) => {
-    res.send('Hello World');
+app.post('/ping', (req, res) => {
+    return res.status(200).json({message:"Ping Done"});
 });
 
 app.listen(port, () => {
