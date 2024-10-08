@@ -15,7 +15,7 @@ const installmentRoutes=require('./routes/installments')
 connectToDB()
 
 app.use(cors({
-  origin: ['https://borrower-management-system.vercel.app', 'http://localhost:3000'],
+  origin: ['https://borrower-management-system.vercel.app', 'http://localhost:3000', 'https://fleese.shop'],
   credentials: true
 }))
 
