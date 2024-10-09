@@ -75,6 +75,9 @@ const monthlyborrowerSchema = mongoose.Schema({
         required: true,
         default: 'pending',
         enum: ['pending', 'closed']
+    },
+    address:{
+        type:String
     }
     
 });
