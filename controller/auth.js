@@ -3,7 +3,7 @@ const MonthlyBorrower = require('../models/monthlyborrower');
 
 exports.registerDailyBorrower = async (req, res) => {
     try {
-        const { name, contact, aadharNumber, chequeNumber,principleAmount,refundAmount,emiAmount,loanScheme,tenure,loanStartDate, loanEndDate, balanceAmount } = req.body;
+        const { name, contact, aadharNumber, chequeNumber,principleAmount,refundAmount,emiAmount,loanScheme,tenure,loanStartDate, loanEndDate, balanceAmount,address } = req.body;
         const dailyBorrower = new DailyBorrower({
             name,
             contact,
@@ -17,6 +17,7 @@ exports.registerDailyBorrower = async (req, res) => {
             loanEndDate,
             balanceAmount,
             tenure,
+            address
         });
 
         await dailyBorrower.save();

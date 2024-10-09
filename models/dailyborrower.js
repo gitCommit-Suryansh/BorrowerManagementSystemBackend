@@ -78,6 +78,9 @@ const dailyborrowerSchema = mongoose.Schema({
         required: true,
         default: 'pending',
         enum: ['pending', 'closed']
+    },
+    address:{
+        type:String
     }
     
 });
