@@ -12,6 +12,10 @@ const installmentSchema = new mongoose.Schema({
     paid: {
       type: Boolean,
       default: false
+    },
+    paidOn:{
+        type:Date,
+        required:true
     }
   });
 
