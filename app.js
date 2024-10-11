@@ -12,6 +12,7 @@ const {connectToDB}=require('./database/connection')
 const authRoutes=require('./routes/auth')
 const fetchRoutes=require('./routes/fetch')
 const installmentRoutes=require('./routes/installments')
+const updateRoutes=require('./routes/update')
 connectToDB()
 
 app.use(cors({
@@ -33,9 +34,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth',authRoutes)
 app.use('/fetch',fetchRoutes)
 app.use('/installment',installmentRoutes)
+app.use('/updateBorrower',updateRoutes)
 
 
-
+app.get('/',(req,res)=>{
+    return res.status(200).json({message:"Working"})
+})
 app.post('/ping', (req, res) => {
     return res.status(200).json({message:"Ping Done"});
 });
