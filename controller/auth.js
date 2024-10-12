@@ -1,5 +1,6 @@
 const DailyBorrower = require('../models/dailyborrower');
 const MonthlyBorrower = require('../models/monthlyborrower');
+const FinanceBorrower = require('../models/finance'); // Import the FinanceBorrower model
 
 exports.registerDailyBorrower = async (req, res) => {
     try {
@@ -50,5 +51,32 @@ exports.registerMonthlyBorrower = async (req, res) => {
         res.status(200).json({ message: 'Monthly Borrower registered successfully', monthlyBorrower });
     } catch (error) {
         res.status(500).json({ message: 'Error registering monthly borrower', error: error.message });
+    }
+};
+
+exports.registerFinanceBorrower = async (req, res) => {
+    try {
+        const { name, contact, aadharNumber, chequeNumber, principleAmount, interestPercentage, refundAmount, loanScheme, tenure, loanStartDate, loanEndDate, balanceAmount, address, discount } = req.body;
+        const financeBorrower = new FinanceBorrower({
+            name,
+            contact,
+            aadharNumber,
+            chequeNumber,
+            principleAmount,
+            interestPercentage,
+            refundAmount,
+            loanScheme,
+            tenure,
+            loanStartDate,
+            loanEndDate,
+            balanceAmount,
+            address,
+            discount // Include discount in the model
+        });
+
+        await financeBorrower.save();
+        res.status(200).json({ message: 'Finance Borrower registered successfully', financeBorrower });
+    } catch (error) {
+        res.status(500).json({ message: 'Error registering finance borrower', error: error.message });
     }
 };
