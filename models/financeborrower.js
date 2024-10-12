@@ -49,6 +49,10 @@ const financeBorrowerSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+    refundedAmount:{
+        type:Number,
+        default:0
+    },
     loanScheme: {
         type: String,
         required: true,

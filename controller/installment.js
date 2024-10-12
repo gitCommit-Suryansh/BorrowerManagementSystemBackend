@@ -225,16 +225,16 @@ exports.addFinanceInstallment = async (req, res) => {
         borrowerId,
         {
           $push: { installments: installment },
-          // $inc: {
-          //   refundedAmount: installment.receivedAmount,
-          //   balanceAmount: -installment.receivedAmount,
-          // },
-          // $set: {
-          //   loanStatus:
-          //     borrower.balanceAmount - installment.receivedAmount <= 0
-          //       ? "closed"
-          //       : borrower.loanStatus,
-          // },
+          $inc: {
+            refundedAmount: installment.receivedAmount,
+            balanceAmount: -installment.amount,
+          },
+          $set: {
+            loanStatus:
+              borrower.balanceAmount - installment.amount <= 0
+                ? "closed"
+                : borrower.loanStatus,
+          },
         },
         { new: true }
       );
