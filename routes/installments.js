@@ -7,6 +7,7 @@ router
     .post('/addmonthlyinstallment',installmentController.addMonthlyInstallment)
     .get('/fetchdailyinstallment',installmentController.fetchDailyInstallment)
     .get('/fetchmonthlyinstallment',installmentController.fetchMonthlyInstallment)
+    .get('/fetchfinanceinstallment',installmentController.fetchFinanceInstallment)
     .post('/adddailyborrowerdiscount',installmentController.addDailyBorrowerDiscount)
     .post('/addmonthlyborrowerdiscount',installmentController.addMonthlyBorrowerDiscount)
     .post('/principlerepayment',installmentController.principlerepayment)
