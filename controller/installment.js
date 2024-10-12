@@ -226,7 +226,7 @@ exports.addFinanceInstallment = async (req, res) => {
         {
           $push: { installments: installment },
           $inc: {
-            refundedAmount: installment.receivedAmount || 0, // Ensure a default value
+            refundedAmount: installment.amount || 0, // Ensure a default value
             balanceAmount: -(installment.amount || 0), // Ensure a default value
           },
           $set: {

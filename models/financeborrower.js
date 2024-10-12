@@ -78,7 +78,8 @@ const financeBorrowerSchema = mongoose.Schema({
     },
     balanceAmount: {
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     installments: [installmentSchema],
     loanStatus: {
