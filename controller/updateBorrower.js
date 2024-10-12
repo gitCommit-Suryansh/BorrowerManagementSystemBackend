@@ -1,12 +1,13 @@
 const DailyBorrower = require('../models/dailyborrower');
 const MonthlyBorrower = require('../models/monthlyborrower');
+const FinanceBorrower = require('../models/financeborrower'); // Import FinanceBorrower model
 
 exports.updateBorrowerDetails = async (req, res) => {
     const borrowerId = req.params.id;
     const { name, contact, address } = req.body;
 
     try {
-        // Determine if the borrower is a daily or monthly borrower
+        // Determine if the borrower is a daily, monthly, or finance borrower
         let updatedBorrower;
 
         // Try to update in DailyBorrower first
@@ -25,7 +26,16 @@ exports.updateBorrowerDetails = async (req, res) => {
             );
         }
 
-        // If borrower is not found in either collection
+        // If not found in MonthlyBorrower, try FinanceBorrower
+        if (!updatedBorrower) {
+            updatedBorrower = await FinanceBorrower.findByIdAndUpdate(
+                borrowerId,
+                { name, contact, address },
+                { new: true } // Return the updated document
+            );
+        }
+
+        // If borrower is not found in any collection
         if (!updatedBorrower) {
             return res.status(404).json({ message: "Borrower not found" });
         }
