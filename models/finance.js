@@ -61,6 +61,9 @@ const financeBorrowerSchema = mongoose.Schema({
     discount:{
         type:Number
     },
+    emiAmount:{
+        type:Number
+    },
     loanStartDate: {
         type: Date,
         required: true

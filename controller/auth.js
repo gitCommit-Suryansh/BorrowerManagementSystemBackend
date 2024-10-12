@@ -56,7 +56,7 @@ exports.registerMonthlyBorrower = async (req, res) => {
 
 exports.registerFinanceBorrower = async (req, res) => {
     try {
-        const { name, contact, aadharNumber, chequeNumber, principleAmount, interestPercentage, refundAmount, loanScheme, tenure, loanStartDate, loanEndDate, balanceAmount, address, discount } = req.body;
+        const { name, contact, aadharNumber, chequeNumber, principleAmount, interestPercentage, refundAmount, loanScheme, tenure,emiAmount, loanStartDate, loanEndDate, balanceAmount, address, discount } = req.body;
         const financeBorrower = new FinanceBorrower({
             name,
             contact,
@@ -67,6 +67,7 @@ exports.registerFinanceBorrower = async (req, res) => {
             refundAmount,
             loanScheme,
             tenure,
+            emiAmount,
             loanStartDate,
             loanEndDate,
             balanceAmount,
