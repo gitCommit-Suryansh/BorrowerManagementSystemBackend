@@ -1,6 +1,6 @@
 const DailyBorrower = require('../models/dailyborrower');
 const MonthlyBorrower = require('../models/monthlyborrower');
-const FinanceBorrower = require('../models/finance'); // Import the FinanceBorrower model
+const FinanceBorrower = require('../models/financeborrower'); // Import the FinanceBorrower model
 
 exports.registerDailyBorrower = async (req, res) => {
     try {
