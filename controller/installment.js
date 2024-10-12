@@ -1,5 +1,5 @@
 const DailyBorrower = require("../models/dailyborrower");
-const monthlyborrower = require("../models/monthlyborrower");
+const FinanceBorrower = require("../models/financeborrower");
 const MonthlyBorrower = require("../models/monthlyborrower");
 
 exports.addDailyInstallment = async (req, res) => {
@@ -191,3 +191,21 @@ exports.principlerepayment=async(req,res)=>{
         res.status(500).json({ message: "Error processing request", error: error.message });
     }
 }
+
+exports.fetchFinanceInstallment = async (req, res) => {
+  try {
+    const { borrowerId } = req.query;
+    const borrower = await FinanceBorrower.findById(borrowerId);
+    if (!borrower) {
+      return res.status(404).json({ message: "Borrower not found" });
+    }
+    console.log(borrower.installments);
+    res
+      .status(200)
+      .json({ message: "Borrower found", installments: borrower.installments });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error processing request", error: error.message });
+  }
+};
