@@ -87,7 +87,8 @@ const dailyborrowerSchema = mongoose.Schema({
         type:String
     },
     reference:{
-        type:String
+        type:String,
+        default:"Self"
     }
     
 });
