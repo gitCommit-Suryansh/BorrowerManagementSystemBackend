@@ -4,7 +4,7 @@ const FinanceBorrower = require('../models/financeborrower'); // Import the Fina
 
 exports.registerDailyBorrower = async (req, res) => {
     try {
-        const { name, contact, aadharNumber, chequeNumber,principleAmount,refundAmount,emiAmount,loanScheme,tenure,loanStartDate, loanEndDate, balanceAmount,address } = req.body;
+        const { name, contact, aadharNumber, chequeNumber,principleAmount,refundAmount,emiAmount,loanScheme,tenure,loanStartDate, loanEndDate, balanceAmount,address ,reference} = req.body;
         const dailyBorrower = new DailyBorrower({
             name,
             contact,
@@ -18,7 +18,8 @@ exports.registerDailyBorrower = async (req, res) => {
             loanEndDate,
             balanceAmount,
             tenure,
-            address
+            address,
+            reference
         });
 
         await dailyBorrower.save();
@@ -30,7 +31,7 @@ exports.registerDailyBorrower = async (req, res) => {
 
 exports.registerMonthlyBorrower = async (req, res) => {
     try {
-        const { name, contact, aadharNumber, chequeNumber, principleAmount, interestPercentage, interestAmount, loanScheme, tenure, loanStartDate, loanEndDate, balanceAmount , address } = req.body;
+        const { name, contact, aadharNumber, chequeNumber, principleAmount, interestPercentage, interestAmount, loanScheme, tenure, loanStartDate, loanEndDate, balanceAmount , address , reference } = req.body;
         const monthlyBorrower = new MonthlyBorrower({
             name,
             contact,
@@ -44,7 +45,8 @@ exports.registerMonthlyBorrower = async (req, res) => {
             loanStartDate,
             loanEndDate,
             balanceAmount,
-            address
+            address,
+            reference
         });
 
         await monthlyBorrower.save();
@@ -56,7 +58,7 @@ exports.registerMonthlyBorrower = async (req, res) => {
 
 exports.registerFinanceBorrower = async (req, res) => {
     try {
-        const { name, contact, aadharNumber, chequeNumber, principleAmount, interestPercentage, refundAmount, loanScheme, tenure,emiAmount, loanStartDate, loanEndDate, balanceAmount, address, discount } = req.body;
+        const { name, contact, aadharNumber, chequeNumber, principleAmount, interestPercentage, refundAmount, loanScheme, tenure,emiAmount, loanStartDate, loanEndDate, balanceAmount, address, discount,reference } = req.body;
         const financeBorrower = new FinanceBorrower({
             name,
             contact,
@@ -72,7 +74,8 @@ exports.registerFinanceBorrower = async (req, res) => {
             loanEndDate,
             balanceAmount,
             address,
-            discount // Include discount in the model
+            discount,
+            reference
         });
 
         await financeBorrower.save();

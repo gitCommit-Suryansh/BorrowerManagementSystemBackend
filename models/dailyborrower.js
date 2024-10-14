@@ -85,6 +85,9 @@ const dailyborrowerSchema = mongoose.Schema({
     },
     address:{
         type:String
+    },
+    reference:{
+        type:String
     }
     
 });

@@ -90,6 +90,9 @@ const financeBorrowerSchema = mongoose.Schema({
     },
     address:{
         type:String
+    },
+    reference:{
+        type:String
     }
     
 });
