@@ -13,6 +13,7 @@ const authRoutes=require('./routes/auth')
 const fetchRoutes=require('./routes/fetch')
 const installmentRoutes=require('./routes/installments')
 const updateRoutes=require('./routes/update')
+const deleteRoutes=require('./routes/delete')
 connectToDB()
 
 app.use(cors({
@@ -35,6 +36,7 @@ app.use('/auth',authRoutes)
 app.use('/fetch',fetchRoutes)
 app.use('/installment',installmentRoutes)
 app.use('/updateBorrower',updateRoutes)
+app.use('/deleteBorrower',deleteRoutes)
 
 
 app.get('/',(req,res)=>{
