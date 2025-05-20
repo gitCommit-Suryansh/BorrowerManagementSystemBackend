@@ -16,6 +16,10 @@ const installmentSchema = new mongoose.Schema({
     paidOn:{
         type:Date,
         required:true
+    },
+    remark: {
+        type: String,
+        default: "Amount Paid"
     }
   });
 

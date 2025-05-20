@@ -4,7 +4,7 @@ const FinanceBorrower = require('../models/financeborrower'); // Import FinanceB
 
 exports.updateBorrowerDetails = async (req, res) => {
     const borrowerId = req.params.id;
-    const { name, contact, address } = req.body;
+    const { name, contact, address, principleAmount } = req.body;
 
     try {
         // Determine if the borrower is a daily, monthly, or finance borrower
@@ -13,7 +13,7 @@ exports.updateBorrowerDetails = async (req, res) => {
         // Try to update in DailyBorrower first
         updatedBorrower = await DailyBorrower.findByIdAndUpdate(
             borrowerId,
-            { name, contact, address },
+            { name, contact, address, principleAmount },
             { new: true } // Return the updated document
         );
 
